@@ -875,12 +875,12 @@ void plan_buffer_line(float x, float y, float z, const float &e, float feed_rate
 
   planner_recalculate();
 
-  st_wake_up();
+  stepper_wake_up();
 }
 
 #ifdef ENABLE_AUTO_BED_LEVELING
 vector_3 plan_get_position() {
-	vector_3 position = vector_3(st_get_position_mm(X_AXIS), st_get_position_mm(Y_AXIS), st_get_position_mm(Z_AXIS));
+	vector_3 position = vector_3(stepper_get_position_mm(X_AXIS), stepper_get_position_mm(Y_AXIS), stepper_get_position_mm(Z_AXIS));
 
 	//position.debug("in plan_get position");
 	//plan_bed_level_matrix.debug("in plan_get bed_level");
@@ -903,7 +903,7 @@ void plan_set_position(float x, float y, float z, const float &e)
   position[Y_AXIS] = lround(y*axis_steps_per_unit[Y_AXIS]);
   position[Z_AXIS] = lround(z*axis_steps_per_unit[Z_AXIS]);     
   position[E_AXIS] = lround(e*axis_steps_per_unit[E_AXIS]);  
-  st_set_position(position[X_AXIS], position[Y_AXIS], position[Z_AXIS], position[E_AXIS]);
+  stepper_set_position(position[X_AXIS], position[Y_AXIS], position[Z_AXIS], position[E_AXIS]);
   previous_nominal_speed = 0.0; // Resets planner junction speeds. Assumes start from rest.
   previous_speed[0] = 0.0;
   previous_speed[1] = 0.0;
@@ -914,7 +914,7 @@ void plan_set_position(float x, float y, float z, const float &e)
 void plan_set_e_position(const float &e)
 {
   position[E_AXIS] = lround(e*axis_steps_per_unit[E_AXIS]);  
-  st_set_e_position(position[E_AXIS]);
+  stepper_set_e_position(position[E_AXIS]);
 }
 
 uint8_t movesplanned()

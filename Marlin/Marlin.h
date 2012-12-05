@@ -182,7 +182,7 @@ extern bool axis_relative_modes[];
 extern int feedmultiply;
 extern bool feedmultiplychanged;
 extern int extrudemultiply; // Sets extrude multiply factor (in percent)
-extern float current_position[NUM_AXIS] ;
+extern float current_position_mm[NUM_AXIS] ;
 extern float add_homeing[3];
 extern float min_pos[3];
 extern float max_pos[3];

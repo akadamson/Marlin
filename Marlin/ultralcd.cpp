@@ -431,11 +431,11 @@ void MainMenu::showStatus()
     }
   }
   static int oldzpos=0;
-  int currentz=current_position[2]*100;
+  int currentz=current_position_mm[2]*100;
   if((currentz!=oldzpos)||force_lcd_update)
   {
     lcd.setCursor(10,1);
-    LCD_PRINT_PGM("Z:");lcd.print(ftostr52(current_position[2]));
+    LCD_PRINT_PGM("Z:");lcd.print(ftostr52(current_position_mm[2]));
     oldzpos=currentz;
   }
   
@@ -619,7 +619,7 @@ void MainMenu::showAxisMove()
                   if(force_lcd_update)
                   {
                     lcd.setCursor(0,line);LCD_PRINT_PGM(" X:");
-                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position[X_AXIS]));
+                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position_mm[X_AXIS]));
                   }
       
                   if((activeline!=line) )
@@ -655,7 +655,7 @@ void MainMenu::showAxisMove()
 			oldencoderpos=encoderpos;
                         encoderpos=0;
 		    }
-                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position[X_AXIS]));
+                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position_mm[X_AXIS]));
                   }
           }
           break;
@@ -664,7 +664,7 @@ void MainMenu::showAxisMove()
                   if(force_lcd_update)
                   {
                     lcd.setCursor(0,line);LCD_PRINT_PGM(" Y:");
-                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position[Y_AXIS]));
+                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position_mm[Y_AXIS]));
                   }
       
                   if((activeline!=line) )
@@ -700,7 +700,7 @@ void MainMenu::showAxisMove()
 			oldencoderpos=encoderpos;
                         encoderpos=0;
 		    }
-                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position[Y_AXIS]));
+                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position_mm[Y_AXIS]));
                   }
           }
           break;
@@ -709,7 +709,7 @@ void MainMenu::showAxisMove()
                   if(force_lcd_update)
                   {
                     lcd.setCursor(0,line);LCD_PRINT_PGM(" Z:");
-                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position[Z_AXIS]));
+                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position_mm[Z_AXIS]));
                   }
       
                   if((activeline!=line) )
@@ -745,7 +745,7 @@ void MainMenu::showAxisMove()
 			oldencoderpos=encoderpos;
                         encoderpos=0;
 		    }
-                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position[Z_AXIS]));
+                    lcd.setCursor(11,line);lcd.print(ftostr52(current_position_mm[Z_AXIS]));
                   }
           }
           break;
@@ -945,7 +945,7 @@ void MainMenu::showTune()
           {
             float factor=float(encoderpos)/100.0/float(axis_steps_per_unit[E_AXIS]);
             position[E_AXIS]=lround(position[E_AXIS]*factor);
-            //current_position[E_AXIS]*=factor;
+            //current_position_mm[E_AXIS]*=factor;
             axis_steps_per_unit[E_AXIS]= encoderpos/100.0;
             encoderpos=activeline*lcdslow;
               
@@ -1793,7 +1793,7 @@ void MainMenu::showControlMotion()
           {
             float factor=float(encoderpos)/100.0/float(axis_steps_per_unit[X_AXIS]);
             position[X_AXIS]=lround(position[X_AXIS]*factor);
-            //current_position[X_AXIS]*=factor;
+            //current_position_mm[X_AXIS]*=factor;
             axis_steps_per_unit[X_AXIS]= encoderpos/100.0;
             encoderpos=activeline*lcdslow;
           }
@@ -1830,7 +1830,7 @@ void MainMenu::showControlMotion()
           {
             float factor=float(encoderpos)/100.0/float(axis_steps_per_unit[Y_AXIS]);
             position[Y_AXIS]=lround(position[Y_AXIS]*factor);
-            //current_position[Y_AXIS]*=factor;
+            //current_position_mm[Y_AXIS]*=factor;
             axis_steps_per_unit[Y_AXIS]= encoderpos/100.0;
             encoderpos=activeline*lcdslow;
               
@@ -1868,7 +1868,7 @@ void MainMenu::showControlMotion()
           {
             float factor=float(encoderpos)/100.0/float(axis_steps_per_unit[Z_AXIS]);
             position[Z_AXIS]=lround(position[Z_AXIS]*factor);
-            //current_position[Z_AXIS]*=factor;
+            //current_position_mm[Z_AXIS]*=factor;
             axis_steps_per_unit[Z_AXIS]= encoderpos/100.0;
             encoderpos=activeline*lcdslow;
               
@@ -1907,7 +1907,7 @@ void MainMenu::showControlMotion()
           {
             float factor=float(encoderpos)/100.0/float(axis_steps_per_unit[E_AXIS]);
             position[E_AXIS]=lround(position[E_AXIS]*factor);
-            //current_position[E_AXIS]*=factor;
+            //current_position_mm[E_AXIS]*=factor;
             axis_steps_per_unit[E_AXIS]= encoderpos/100.0;
             encoderpos=activeline*lcdslow;
               

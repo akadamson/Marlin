@@ -211,7 +211,7 @@ void enable_endstops(bool check)
 //  step_events_completed reaches block->decelerate_after after which it decelerates until the trapezoid generator is reset.
 //  The slope of acceleration is calculated with the leib ramp alghorithm.
 
-void st_wake_up() {
+void stepper_wake_up() {
   //  TCNT1 = 0;
   ENABLE_STEPPER_DRIVER_INTERRUPT();  
 }
@@ -714,7 +714,7 @@ ISR(TIMER1_COMPA_vect)
   }
 #endif // ADVANCE
 
-void st_init()
+void stepper_init()
 {
   digipot_init(); //Initialize Digipot Motor Current
   microstep_init(); //Initialize Microstepping Pins
@@ -900,7 +900,7 @@ void st_init()
 
 
 // Block until all buffered steps are executed
-void st_synchronize()
+void stepper_synchronize()
 {
     while( blocks_queued()) {
     manage_heater();
@@ -909,7 +909,7 @@ void st_synchronize()
   }
 }
 
-void st_set_position(const long &x, const long &y, const long &z, const long &e)
+void stepper_set_position(const long &x, const long &y, const long &z, const long &e)
 {
   CRITICAL_SECTION_START;
   count_position[X_AXIS] = x;
@@ -919,14 +919,14 @@ void st_set_position(const long &x, const long &y, const long &z, const long &e)
   CRITICAL_SECTION_END;
 }
 
-void st_set_e_position(const long &e)
+void stepper_set_e_position(const long &e)
 {
   CRITICAL_SECTION_START;
   count_position[E_AXIS] = e;
   CRITICAL_SECTION_END;
 }
 
-long st_get_position(uint8_t axis)
+long stepper_get_position(uint8_t axis)
 {
   long count_pos;
   CRITICAL_SECTION_START;
@@ -935,15 +935,15 @@ long st_get_position(uint8_t axis)
   return count_pos;
 }
 
-float st_get_position_mm(uint8_t axis)
+float stepper_get_position_mm(uint8_t axis)
 {
-  float steper_position_in_steps = st_get_position(axis);
+  float steper_position_in_steps = stepper_get_position(axis);
   return steper_position_in_steps / axis_steps_per_unit[axis];
 }
 
 void finishAndDisableSteppers()
 {
-  st_synchronize(); 
+  stepper_synchronize(); 
   LCD_MESSAGEPGM(MSG_STEPPER_RELEASED);
   disable_x(); 
   disable_y(); 

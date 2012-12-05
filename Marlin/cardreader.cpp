@@ -527,7 +527,7 @@ void CardReader::updir()
 
 void CardReader::printingHasFinished()
 {
- st_synchronize();
+ stepper_synchronize();
  quickStop();
  sdprinting = false;
  if(SD_FINISHED_STEPPERRELEASE)

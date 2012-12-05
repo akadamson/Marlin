@@ -39,24 +39,24 @@
 
 
 // Initialize and start the stepper motor subsystem
-void st_init();
+void stepper_init();
 
 // Block until all buffered steps are executed
-void st_synchronize();
+void stepper_synchronize();
 
 // Set current position in steps
-void st_set_position(const long &x, const long &y, const long &z, const long &e);
-void st_set_e_position(const long &e);
+void stepper_set_position(const long &x, const long &y, const long &z, const long &e);
+void stepper_set_e_position(const long &e);
 
 // Get current position in steps
-long st_get_position(uint8_t axis);
+long stepper_get_position(uint8_t axis);
 
 // Get current position in mm
-float st_get_position_mm(uint8_t axis);
+float stepper_get_position_mm(uint8_t axis);
 
 // The stepper subsystem goes to sleep when it runs out of things to execute. Call this
 // to notify the subsystem that it is time to go to work.
-void st_wake_up();
+void stepper_wake_up();
 
   
 void checkHitEndstops(); //call from somwhere to create an serial error message with the locations the endstops where hit, in case they were triggered
